@@ -1,0 +1,3 @@
+#define RAYENG_VERSION "0.0"
+
+#define MAP_UNIT_SCALAR 10.0
