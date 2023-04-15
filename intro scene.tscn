@@ -1,0 +1,318 @@
+[gd_scene load_steps=20 format=3 uid="uid://l8elqrtgtpah"]
+
+[ext_resource type="Script" path="res://intro scene.gd" id="1_8fbpj"]
+[ext_resource type="Texture2D" uid="uid://dndl8caujsc3h" path="res://assets/0.png" id="1_fyj4m"]
+[ext_resource type="Shader" path="res://shaders/dissolve.gdshader" id="1_ny3ae"]
+[ext_resource type="Shader" path="res://shaders/vhs.gdshader" id="1_ufbde"]
+[ext_resource type="Texture2D" uid="uid://dnssgit4cgkei" path="res://assets/plr.png" id="2_4s7mq"]
+[ext_resource type="Texture2D" uid="uid://givhbiephegw" path="res://assets/1.png" id="2_rrxi1"]
+[ext_resource type="Script" path="res://src/shake.gd" id="3_ka0mc"]
+[ext_resource type="AudioStream" uid="uid://csvapyb0ja8hx" path="res://sounds/powerUp.wav" id="5_ioodm"]
+[ext_resource type="AudioStream" uid="uid://dw251cotit5bi" path="res://sounds/explosion.wav" id="6_t7h7n"]
+[ext_resource type="AudioStream" uid="uid://b7sdr82diql7t" path="res://sounds/blipSelect.wav" id="8_btuls"]
+
+[sub_resource type="Curve" id="Curve_705lh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.52121, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a0juy"]
+curve = SubResource("Curve_705lh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_im01f"]
+emission_shape = 3
+emission_box_extents = Vector3(800, 100, 100)
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 94.74
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 257.43
+initial_velocity_max = 257.43
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.05
+scale_max = 0.05
+scale_curve = SubResource("CurveTexture_a0juy")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_unqs4"]
+frequency = 0.085
+offset = Vector3(0, 1.30435e+08, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hn45c"]
+invert = true
+noise = SubResource("FastNoiseLite_unqs4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dbev1"]
+shader = ExtResource("1_ny3ae")
+shader_parameter/dissolve_value = 1.0
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_hn45c")
+
+[sub_resource type="Animation" id="Animation_rgekb"]
+resource_name = "intro!1!!"
+length = 13.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Plr:material:shader_parameter/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 11.61, 11.72),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Plr:amplitude")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 17, 167, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2D:amplitude")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.4, 1, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1, 71, 0, 32]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera2D:frameblend")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 72]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Camera2D:lerp")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.005]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer:stream")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_ioodm"), ExtResource("6_t7h7n"), ExtResource("8_btuls")]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 1.7, 1.9, 2, 2.1, 2.2, 2.3, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 6.6, 6.7, 6.8, 6.9, 7, 7.1, 7.2, 7.26, 7.33, 7.4, 7.47, 7.54, 7.6, 7.66, 7.72, 8.86, 8.93, 9, 9.06, 9.12, 9.18, 9.25, 9.32, 9.39, 9.45, 9.51),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-15.928, -15.928, 0.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Label:text")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1.68607, 4.2, 7.1, 9.22),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["Good you are functioning.", "You are a BIT...", "You transfer a single piece of data.
+Either a 1 or a 0.", "I have a task for you."]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Label:visible_ratio")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1.68607, 2.3, 3.7, 4.2, 4.7, 6.5, 7.1, 7.7, 8.83, 9.22, 9.52, 11.61, 11.72),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("GPUParticles2D:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.8, 12.09),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("GPUParticles2D2:emitting")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.8, 12.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("ColorRect:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(11.81, 13),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hmljt"]
+_data = {
+"intro!1!!": SubResource("Animation_rgekb")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_67sgg"]
+shader = ExtResource("1_ufbde")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.067
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = false
+shader_parameter/roll_speed = 0.529
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 1000.0
+shader_parameter/static_noise_intensity = 0.169
+shader_parameter/aberration = -0.00999995
+shader_parameter/brightness = 1.084
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[node name="intro scene" type="Node2D"]
+script = ExtResource("1_8fbpj")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -481)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_im01f")
+texture = ExtResource("1_fyj4m")
+lifetime = 4.39
+visibility_rect = Rect2(-100, -100, 2000, 2000)
+trail_lifetime = 7.44
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(43, -480)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_im01f")
+texture = ExtResource("2_rrxi1")
+lifetime = 4.39
+visibility_rect = Rect2(-100, -100, 2000, 2000)
+trail_lifetime = 7.44
+
+[node name="Plr" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dbev1")
+position = Vector2(-64, 39)
+rotation = -0.209605
+scale = Vector2(1.77586, 1.77586)
+texture = ExtResource("2_4s7mq")
+offset = Vector2(78.0091, -38.553)
+script = ExtResource("3_ka0mc")
+amplitude = 0
+shaking = true
+pos = Vector2(-64, 39)
+smooth = null
+frameblend = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "intro!1!!"
+libraries = {
+"": SubResource("AnimationLibrary_hmljt")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_t7h7n")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -198.0
+offset_top = -343.0
+offset_right = 530.0
+offset_bottom = -215.0
+theme_override_font_sizes/font_size = 44
+text = "Good you are functioning."
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-9.11043, -28.2507)
+script = ExtResource("3_ka0mc")
+amplitude = 13
+shaking = true
+pos = Vector2(-5.65433, -24.4652)
+smooth = true
+frameblend = 30
+lerp = 0.573571
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+material = SubResource("ShaderMaterial_67sgg")
+offset_left = -594.0
+offset_top = -379.0
+offset_right = 589.0
+offset_bottom = 331.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -612.0
+offset_top = -455.0
+offset_right = 658.0
+offset_bottom = 339.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

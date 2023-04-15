@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://sfjebystj3r5"]
+
+[ext_resource type="Script" path="res://mainmenu.gd" id="1_2n7go"]
+[ext_resource type="Texture2D" uid="uid://c5s1on5hbc6t4" path="res://assets/logo.png" id="1_4yg5e"]
+[ext_resource type="Theme" uid="uid://dan5ey36jj6ka" path="res://askldj.tres" id="3_07ujo"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2n7go")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4yg5e")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -63.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_07ujo")
+text = "PLAY"
+flat = true
